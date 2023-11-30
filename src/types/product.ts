@@ -1,10 +1,13 @@
+export enum ProductDepartment {
+  Mens = "MENS",
+  Womens = "WOMENS",
+}
+
 export enum ProductCategory {
   Hats = "HATS",
   Jackets = "JACKETS",
   Shoes = "SHOES",
   Accessories = "ACCESSORIES",
-  Mens = "MENS",
-  Womens = "WOMENS",
 }
 
 export interface Product {
@@ -14,4 +17,5 @@ export interface Product {
   price: number;
   imgSrc: string;
   categories: ProductCategory[];
+  departments: ProductDepartment[];
 }

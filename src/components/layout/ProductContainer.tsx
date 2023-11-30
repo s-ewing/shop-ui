@@ -7,13 +7,7 @@ interface ProductContainerProps {
 
 const ProductContainer = ({ children }: ProductContainerProps) => {
   return (
-    <Flex
-      w="100%"
-      align="center"
-      justify="center"
-      wrap="wrap"
-      background="cyan.800"
-    >
+    <Flex w="100%" align="center" justify="space-evenly" wrap="wrap">
       {children}
     </Flex>
   );

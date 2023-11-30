@@ -19,7 +19,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const { addToCart } = useCart();
 
   return (
-    <Card maxW="sm" m={2}>
+    <Card maxW="sm" my={2}>
       <CardBody background="orange.200" borderRadius="lg">
         <Image
           src={product.imgSrc}
