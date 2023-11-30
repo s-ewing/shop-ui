@@ -16,7 +16,13 @@ const DepartmentFilter = ({ setSelectedDepartment }: DepartmentFilterProps) => {
   };
 
   return (
-    <Select placeholder="Department" onChange={handleSelect}>
+    <Select
+      placeholder="Department"
+      onChange={handleSelect}
+      width="xs"
+      mb={2}
+      bg="orange.100"
+    >
       {Object.keys(ProductDepartment).map((key) => (
         <option
           key={key}

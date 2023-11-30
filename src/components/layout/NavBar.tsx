@@ -20,10 +20,10 @@ const NavBar = ({
       w="100%"
       justify="space-between"
       padding={6}
-      bg="cyan.800"
-      color="white"
-      borderBottom="1px"
-      borderColor="white"
+      bg="whiteAlpha.900"
+      color="cyan.900"
+      borderBottom="2px"
+      borderColor="cyan.800"
     >
       <Box>
         <Text fontSize="4xl">Clothing Store</Text>

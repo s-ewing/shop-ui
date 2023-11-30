@@ -15,7 +15,13 @@ const CategoryFilter = ({ setSelectedCategory }: CategoryFilterProps) => {
       : setSelectedCategory(e.target.value as ProductCategory);
   };
   return (
-    <Select placeholder="Category" onChange={handleSelect}>
+    <Select
+      placeholder="Category"
+      onChange={handleSelect}
+      width="xs"
+      mb={2}
+      bg="orange.100"
+    >
       {Object.keys(ProductCategory).map((key) => (
         <option
           key={key}

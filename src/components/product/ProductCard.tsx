@@ -20,19 +20,20 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Card maxW="sm" my={2}>
-      <CardBody background="orange.200" borderRadius="lg">
+      <CardBody background="cyan.900" borderRadius="md">
         <Image
           src={product.imgSrc}
           alt={product.description}
-          borderRadius="lg"
-          border="1px solid teal"
+          borderRadius="sm"
           h="xs"
           w="xs"
         />
         <Flex mt="3" align="center" justify="space-between">
           <Box>
-            <Heading size="md">{product.name}</Heading>
-            <Text color="cyan.800" fontSize="lg" fontWeight="bold">
+            <Heading size="md" color="whiteAlpha.900">
+              {product.name}
+            </Heading>
+            <Text color="cyan.500" fontSize="lg" fontWeight="bold">
               ${product.price}
             </Text>
           </Box>
