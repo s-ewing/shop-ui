@@ -56,6 +56,12 @@ const OrderHistoryItem = ({ order }: OrderHistoryItemProps) => {
                 </Flex>
               ))}
             </Box>
+            <Flex wrap="nowrap" justify="space-between">
+              <Text fontSize="md" fontWeight="bold">
+                Total
+              </Text>
+              ${order.total}
+            </Flex>
           </Stack>
         </AccordionPanel>
       </AccordionItem>

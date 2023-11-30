@@ -17,4 +17,5 @@ export interface Order {
   items: OrderItem[];
   orderStatus: OrderStatus;
   timePlaced: string;
+  total: number;
 }
