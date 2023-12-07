@@ -1,17 +1,29 @@
-import { Box, Flex, Text, Button } from "@chakra-ui/react";
+import { Box, Flex, Text, Button, useDisclosure } from "@chakra-ui/react";
 import { useAuth } from "../../context/AuthProvider";
+import { Link } from "react-router-dom";
+import LoginModal from "./LoginModal";
+import ProfileModal from "./ProfileModal";
+import CartDrawer from "./CartDrawer";
 
-interface NavBarProps {
-  onOpenLoginModal: () => void;
-  onOpenCartDrawer: () => void;
-  onOpenProfileModal: () => void;
-}
+const NavBar = () => {
+  const {
+    isOpen: isOpenLoginModal,
+    onOpen: onOpenLoginModal,
+    onClose: onCloseLoginModal,
+  } = useDisclosure();
 
-const NavBar = ({
-  onOpenLoginModal,
-  onOpenCartDrawer,
-  onOpenProfileModal,
-}: NavBarProps) => {
+  const {
+    isOpen: isOpenProfileModal,
+    onOpen: onOpenProfileModal,
+    onClose: onCloseProfileModal,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenCartDrawer,
+    onOpen: onOpenCartDrawer,
+    onClose: onCloseCartDrawer,
+  } = useDisclosure();
+
   const { user, logout } = useAuth();
   return (
     <Flex
@@ -25,9 +37,23 @@ const NavBar = ({
       borderBottom="2px"
       borderColor="cyan.800"
     >
-      <Box>
-        <Text fontSize="4xl">Clothing Store</Text>
-      </Box>
+      <LoginModal
+        isOpenLoginModal={isOpenLoginModal}
+        onCloseLoginModal={onCloseLoginModal}
+      />
+      <ProfileModal
+        isOpenProfileModal={isOpenProfileModal}
+        onCloseProfileModal={onCloseProfileModal}
+      />
+      <CartDrawer
+        isOpenCartDrawer={isOpenCartDrawer}
+        onCloseCartDrawer={onCloseCartDrawer}
+      />
+      <Link to="/">
+        <Box>
+          <Text fontSize="4xl">Clothing Store</Text>
+        </Box>
+      </Link>
       <Flex align="center">
         {!user ? (
           <Button

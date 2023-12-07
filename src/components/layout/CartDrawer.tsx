@@ -9,12 +9,13 @@ import {
   Button,
   Text,
   Flex,
-  useToast,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { useCart } from "../../context/CartProvider";
 import CartItem from "../cart/CartItem";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
+import { useStripe } from "../../context/StripeProvider";
+import axios from "axios";
 
 interface CartDrawerProps {
   isOpenCartDrawer: boolean;
@@ -25,14 +26,18 @@ const CartDrawer = ({
   isOpenCartDrawer,
   onCloseCartDrawer,
 }: CartDrawerProps) => {
-  const { cart, setCart } = useCart();
+  const { cart } = useCart();
   const { user } = useAuth();
-  const toast = useToast();
+  const { setClientSecret } = useStripe();
 
   const handleSubmitOrder = async () => {
+    if (cart.length === 0) {
+      onCloseCartDrawer();
+      return;
+    }
     if (user) {
+      const jwt = user.jwt;
       try {
-        const jwt = user.jwt;
         const response = await axios.post(
           `${import.meta.env.VITE_API_BASE_URL}/orders`,
           { items: cart },
@@ -42,37 +47,12 @@ const CartDrawer = ({
             },
           }
         );
-        user.orders.push(response.data);
-        toast({
-          title: "Order Submitted",
-          description: "Your order has been submitted.",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
-        onCloseCartDrawer();
-        setCart([]);
+        setClientSecret(response.data.stripeClientSecret);
       } catch (err) {
-        toast({
-          title: "Error Submitting Order",
-          description: "There was an error submitting your order.  Try again.",
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
+        console.error(err);
       }
-    } else {
-      toast({
-        title: "Login Required",
-        description: "Login to place an order.",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
-      });
     }
+    onCloseCartDrawer();
   };
 
   return (
@@ -93,9 +73,15 @@ const CartDrawer = ({
         </DrawerBody>
         <DrawerFooter>
           <Flex justify="space-between" gap={12}>
-            <Button colorScheme="orange" size="lg" onClick={handleSubmitOrder}>
-              Submit Order
-            </Button>
+            <Link to="/checkout">
+              <Button
+                colorScheme="orange"
+                size="lg"
+                onClick={handleSubmitOrder}
+              >
+                Checkout
+              </Button>
+            </Link>
             <Text fontSize="lg" fontWeight="bold" p={2}>
               Total: $
               {cart

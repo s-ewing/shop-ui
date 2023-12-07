@@ -1,8 +1,8 @@
 import { Product } from "./product";
 
-enum OrderStatus {
+export enum OrderStatus {
   PENDING = "PENDING",
-  PROCESSING = "PROCESSING",
+  PAID = "PAID",
   COMPLETED = "COMPLETED",
   CANCELED = "CANCELED",
 }
